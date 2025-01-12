@@ -1,12 +1,17 @@
 export default class methods {
-  constructor(btnMethods, urlElement, btnRequest, urlToken) {
+  constructor(btnMethods, urlElement, btnRequest, urlToken, dataBody) {
     this.btnMethods = document.querySelectorAll(btnMethods);
     this.urlElement = document.querySelector(urlElement);
     this.btnRequest = document.querySelector(btnRequest);
     this.urlToken = document.querySelector(urlToken);
+    this.dataBody = document.querySelector(dataBody);
     this.responseApi = {};
     this.method = '';
     this.urlRequest = '';
+    this.bodyRequest = '';
+    this.jsonBodyFormat;
+    this.keysObjtoForEach = '';
+    this.objetoDe = {};
   }
   //https://apitarefas-ahhx.onrender.com/tarefas
 
@@ -20,25 +25,30 @@ export default class methods {
 
   requestClickBtn(event) {
     event.preventDefault();
-    console.log(this.method);
+
     this.createObjectForHeaders(this.method);
   }
 
   createObjectForHeaders(methodRequest) {
-    let post = true;
+    console.log(methodRequest);
+    console.log(methodRequest);
+
     let objectRequest = {};
-    if (methodRequest === 'POST') {
+    const bodyData = this.dataBody.value
+      ? JSON.parse(this.dataBody.value)
+      : null;
+
+    if (methodRequest === 'POST' || methodRequest === 'PUT') {
       objectRequest = {
         method: methodRequest,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.urlToken.value}`,
         },
-        body: post
-          ? JSON.stringify({
-              titulo: 'Olá',
-            })
-          : null,
+        corpo: JSON.stringify({
+          titulo: 'Varrer',
+          concluida: true,
+        }),
       };
     } else {
       objectRequest = {
@@ -50,28 +60,27 @@ export default class methods {
       };
     }
 
-    console.log(objectRequest);
-
     this.fecthUrl(objectRequest);
   }
 
-  fecthUrl({ method, headers, body }) {
-    console.log(headers.Authorization);
-    fetch(this.urlRequest, {
+  fecthUrl({ method, headers, corpo }) {
+    console.log(this.urlRequest);
+    console.log(method);
+    fetch(`${this.urlRequest}`, {
       method: method,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: headers.Authorization,
-      },
-      body: body,
+      headers: headers,
+      body: corpo,
     })
       .then((response) => {
-        this.responseApi = response;
-        console.log(this.responseApi);
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
         return response.json();
       })
       .then((dados) => {
         console.log(dados);
+      })
+      .catch((error) => {
+        console.error('Erro CORS ou outro erro:', error);
       });
   }
 

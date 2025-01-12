@@ -5,5 +5,6 @@ const metodos = new methods(
   '[data-url-element]',
   '[data-request-button]',
   '[data-url-token]',
+  '[data-body]',
 );
 metodos.init();
