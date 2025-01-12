@@ -1,8 +1,9 @@
 export default class methods {
-  constructor(btnMethods, urlElement, btnRequest) {
+  constructor(btnMethods, urlElement, btnRequest, urlToken) {
     this.btnMethods = document.querySelectorAll(btnMethods);
     this.urlElement = document.querySelector(urlElement);
     this.btnRequest = document.querySelector(btnRequest);
+    this.urlToken = document.querySelector(urlToken);
     this.responseApi = {};
     this.method = '';
     this.urlRequest = '';
@@ -31,6 +32,7 @@ export default class methods {
         method: methodRequest,
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.urlToken.value}`,
         },
         body: post
           ? JSON.stringify({
@@ -43,6 +45,7 @@ export default class methods {
         method: methodRequest,
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.urlToken.value}`,
         },
       };
     }
@@ -53,11 +56,12 @@ export default class methods {
   }
 
   fecthUrl({ method, headers, body }) {
-    console.log(body);
+    console.log(headers.Authorization);
     fetch(this.urlRequest, {
       method: method,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: headers.Authorization,
       },
       body: body,
     })
