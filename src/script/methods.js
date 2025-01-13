@@ -17,8 +17,13 @@ export default class methods {
   }
   //https://apitarefas-ahhx.onrender.com/tarefas
 
+  getLocalStorageToken() {
+    let token = window.localStorage.getItem('token');
+    this.urlToken.value = token;
+  }
+
   getMethodsClick() {
-    this.method = "GET"
+    this.method = 'GET';
     this.btnMethods.forEach((itemClick, index) => {
       itemClick.addEventListener('click', () => {
         this.method = this.btnMethods[index].dataset.methodsElement;
@@ -145,6 +150,8 @@ export default class methods {
     this.urlElement.addEventListener('change', () => {
       this.urlRequest = this.urlElement.value;
     });
+
+    this.getLocalStorageToken();
 
     return this;
   }

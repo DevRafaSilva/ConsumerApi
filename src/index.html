@@ -8,7 +8,7 @@
   <title>testador de api</title>
 </head>
 
-<body class="bg-slate-950 h-[100vh] gap-6 grid  grid-cols-[1fr,1fr]">
+<body class="bg-slate-950 h-[100vh] gap-14 grid  grid-cols-[1fr,1fr]">
   <main class="font-sans grid ml-6 mt-3 content-start">
     <ul class=" *:bg-lime-300 *:font-semibold *:text-lime-900 *:rounded-md *:flex-1 *:px-5 *:py-3 flex flex-1 gap-4 mb-6">
       <li data-methods-element="GET" class="cursor-pointer text-center"><button>GET</button></li>
@@ -19,7 +19,12 @@
     <form class="text-white" action="">
       <div class="flex mb-3 flex-col">
         <label class="uppercase inline  mb-3" for="url">Token</label>
-        <input data-url-token class="bg-gray-800  inline-block py-3 px-5 rounded-md" type="text" name="url" id="url">
+        <div class=" flex items-center gap-6 relative">
+          <input data-url-token class="bg-gray-800 flex-1 inline-block py-3 px-5 rounded-md" type="text" name="url" id="url">
+          <div class="absolute right-2">
+            <img data-save-token class="w-8 " src="./img/marca.png" alt="Icone cadeado fechado">
+          </div>
+        </div>
       </div>
       <div class="flex flex-col">
         <label class="uppercase inline  mb-3" for="url">Url</label>
