@@ -1,12 +1,21 @@
 import dadosRequest from './dadosRequest.js';
 
 export default class methods {
-  constructor(btnMethods, urlElement, btnRequest, urlToken, dataBody) {
+  constructor(
+    btnMethods,
+    urlElement,
+    btnRequest,
+    urlToken,
+    dataBody,
+    dataLoadingElement,
+  ) {
+    this.carregando = false;
     this.btnMethods = document.querySelectorAll(btnMethods);
     this.urlElement = document.querySelector(urlElement);
     this.btnRequest = document.querySelector(btnRequest);
     this.urlToken = document.querySelector(urlToken);
     this.dataBody = document.querySelector(dataBody);
+    this.dataLoadingElement = document.querySelector(dataLoadingElement);
     this.responseApi = {};
     this.method = '';
     this.urlRequest = '';
@@ -70,75 +79,46 @@ export default class methods {
 
   fecthUrl({ method, headers, corpo }) {
     console.log(method);
-    fetch(`${this.urlRequest}`, {
-      method: method,
-      headers: headers,
-      body: corpo,
-    })
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(`HTTP error! status: ${response.status}`);
-        return response.json();
-      })
-      .then((dados) => {
-        const obj = [
-          {
-            id: 1,
-            name: 'João Silva',
-            email: 'joao.silva@example.com',
-            role: 'admin',
-          },
-          {
-            id: 2,
-            name: 'Maria Souza',
-            email: 'maria.souza@example.com',
-            role: 'user',
-          },
-          {
-            id: 3,
-            name: 'Carlos Oliveira',
-            email: 'carlos.oliveira@example.com',
-            role: 'editor',
-          },
-          {
-            id: 4,
-            name: 'Ana Martins',
-            email: 'ana.martins@example.com',
-            role: 'user',
-          },
-          {
-            id: 5,
-            name: 'Roberta Almeida',
-            email: 'roberta.almeida@example.com',
-            role: 'manager',
-          },
-          {
-            id: 6,
-            name: 'Pedro Santos',
-            email: 'pedro.santos@example.com',
-            role: 'admin',
-          },
-          {
-            id: 7,
-            name: 'Fernanda Costa',
-            email: 'fernanda.costa@example.com',
-            role: 'user',
-          },
-          {
-            id: 8,
-            name: 'Lucas Pereira',
-            email: 'lucas.pereira@example.com',
-            role: 'developer',
-          },
-        ];
+    try {
+      this.carregando = true;
+      if (this.carregando) {
+        this.dataLoadingElement.classList.remove('hidden');
+        this.btnRequest.classList.add('opacity-50');
+      }
 
-        let dadosFunction = new dadosRequest('[data-html-for-request]', obj);
-        dadosFunction.init();
-        console.log(dados);
+      fetch(`${this.urlRequest}`, {
+        method: method,
+        headers: headers,
+        body: corpo,
       })
-      .catch((error) => {
-        console.error('Erro CORS ou outro erro:', error);
-      });
+        .then((response) => {
+          if (!response.ok)
+            throw new Error(`HTTP error! status: ${response.status}`);
+          return response.json();
+        })
+        .then((dados) => {
+          let dadosFunction = new dadosRequest(
+            '[data-html-for-request]',
+            dados,
+          );
+          dadosFunction.init();
+          console.log(dados);
+        })
+        .catch((error) => {
+          console.error('Erro CORS ou outro erro:', error);
+        });
+    } catch (err) {
+      console.log(err);
+      this.carregando = false;
+    } finally {
+      this.carregando = false;
+      if (this.carregando == false) {
+        setInterval(() => {
+          this.dataLoadingElement.classList.add('hidden');
+          this.btnRequest.classList.remove('opacity-50');
+        }, 100);
+      }
+    }
   }
 
   init() {

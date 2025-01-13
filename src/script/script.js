@@ -8,6 +8,7 @@ const metodos = new methods(
   '[data-request-button]',
   '[data-url-token]',
   '[data-body]',
+  '[data-loading-element]',
 );
 metodos.init();
 
