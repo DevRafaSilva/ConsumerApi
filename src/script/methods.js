@@ -18,6 +18,7 @@ export default class methods {
   //https://apitarefas-ahhx.onrender.com/tarefas
 
   getMethodsClick() {
+    this.method = "GET"
     this.btnMethods.forEach((itemClick, index) => {
       itemClick.addEventListener('click', () => {
         this.method = this.btnMethods[index].dataset.methodsElement;

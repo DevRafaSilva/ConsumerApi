@@ -1,4 +1,5 @@
 import methods from './methods.js';
+import addClassbtns from './addClassButtonsRequest.js';
 
 const metodos = new methods(
   '[data-methods-element]',
@@ -8,3 +9,6 @@ const metodos = new methods(
   '[data-body]',
 );
 metodos.init();
+
+const adicionarClasses = new addClassbtns('[data-methods-element]');
+adicionarClasses.init();
