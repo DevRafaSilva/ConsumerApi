@@ -1,3 +1,5 @@
+import dadosRequest from './dadosRequest.js';
+
 export default class methods {
   constructor(btnMethods, urlElement, btnRequest, urlToken, dataBody) {
     this.btnMethods = document.querySelectorAll(btnMethods);
@@ -45,10 +47,7 @@ export default class methods {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.urlToken.value}`,
         },
-        corpo: JSON.stringify({
-          titulo: 'Varrer',
-          concluida: true,
-        }),
+        corpo: JSON.stringify(bodyData),
       };
     } else {
       objectRequest = {
@@ -64,7 +63,6 @@ export default class methods {
   }
 
   fecthUrl({ method, headers, corpo }) {
-    console.log(this.urlRequest);
     console.log(method);
     fetch(`${this.urlRequest}`, {
       method: method,
@@ -77,6 +75,59 @@ export default class methods {
         return response.json();
       })
       .then((dados) => {
+        const obj = [
+          {
+            id: 1,
+            name: 'João Silva',
+            email: 'joao.silva@example.com',
+            role: 'admin',
+          },
+          {
+            id: 2,
+            name: 'Maria Souza',
+            email: 'maria.souza@example.com',
+            role: 'user',
+          },
+          {
+            id: 3,
+            name: 'Carlos Oliveira',
+            email: 'carlos.oliveira@example.com',
+            role: 'editor',
+          },
+          {
+            id: 4,
+            name: 'Ana Martins',
+            email: 'ana.martins@example.com',
+            role: 'user',
+          },
+          {
+            id: 5,
+            name: 'Roberta Almeida',
+            email: 'roberta.almeida@example.com',
+            role: 'manager',
+          },
+          {
+            id: 6,
+            name: 'Pedro Santos',
+            email: 'pedro.santos@example.com',
+            role: 'admin',
+          },
+          {
+            id: 7,
+            name: 'Fernanda Costa',
+            email: 'fernanda.costa@example.com',
+            role: 'user',
+          },
+          {
+            id: 8,
+            name: 'Lucas Pereira',
+            email: 'lucas.pereira@example.com',
+            role: 'developer',
+          },
+        ];
+
+        let dadosFunction = new dadosRequest('[data-html-for-request]', obj);
+        dadosFunction.init();
         console.log(dados);
       })
       .catch((error) => {
