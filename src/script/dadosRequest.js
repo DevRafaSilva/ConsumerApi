@@ -5,11 +5,15 @@ export default class dadosRequest {
   }
 
   postInAppendHtml() {
+    this.dataAppend.innerText = '';
     this.dados.forEach((item) => {
-      let criariDiv = document.createElement('div');
+      let criariDiv = document.createElement('p');
       console.log(item);
       let formatJson = JSON.stringify(item);
-      criariDiv.innerText = formatJson;
+      let formatarChaves = formatJson.replace('{', '{\n');
+      let formatarVirgulas = formatarChaves.replace(/,/g, ',\n');
+      criariDiv.innerText = formatarVirgulas;
+      criariDiv.classList.add('my-4');
       this.dataAppend.appendChild(criariDiv);
     });
   }
