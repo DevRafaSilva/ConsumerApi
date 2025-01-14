@@ -1,4 +1,5 @@
 import formartJson from './formatJson.js';
+import getResponseApi from './getResponse.js';
 
 export default class methods {
   constructor(
@@ -88,6 +89,14 @@ export default class methods {
         body: corpo,
       })
         .then((response) => {
+          console.log(response);
+          let getResponse = new getResponseApi(
+            response,
+            '[data-btn-response]',
+            '[data-span-animate]',
+            '[data-span-text]',
+          );
+          getResponse.init();
           if (!response.ok)
             throw new Error(`HTTP error! status: ${response.status}`);
           return response.json();
@@ -96,9 +105,6 @@ export default class methods {
           let dadosFunction = new formartJson(dados);
           dadosFunction.init();
           console.log(dadosFunction);
-        })
-        .catch((error) => {
-          console.error('Erro CORS ou outro erro:', error);
         });
     } catch (err) {
       console.log(err);

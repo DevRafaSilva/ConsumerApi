@@ -20,11 +20,11 @@ export default class dadosRequest {
   }
 
   dadosNotForEach() {
-    // this.dataAppend.innerText = '';
-    // let criariDiv = document.createElement('p');
-    // criariDiv.innerText = this.formartJson;
-    // criariDiv.classList.add('my-4');
-    // this.dataAppend.appendChild(criariDiv);
+    this.dataAppend.innerText = '';
+    let criariDiv = document.createElement('p');
+    criariDiv.innerText = this.formartJson;
+    criariDiv.classList.add('my-4');
+    this.dataAppend.appendChild(criariDiv);
   }
 
   postInAppendHtml() {
