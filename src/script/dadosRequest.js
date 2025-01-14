@@ -8,9 +8,7 @@ export default class dadosRequest {
   verifyIsFunction() {
     if (typeof this.dados.forEach === 'function') {
       this.postInAppendHtml();
-      this.iniciarJson();
     } else {
-      this.iniciarJson();
       this.dadosNotForEach();
     }
   }
