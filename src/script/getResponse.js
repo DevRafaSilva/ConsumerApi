@@ -42,7 +42,11 @@ export default class getResponseApi {
 
     console.log(this.response.status);
 
-    if (this.response.status === 200) {
+    if (
+      this.response.status === 200 ||
+      this.response.status === 201 ||
+      this.response.status === 204
+    ) {
       this.textSpan.classList.add('text-green-900');
       this.dataBtn.classList.add('bg-green-400');
     } else if (this.response.status === 404) {

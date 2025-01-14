@@ -1,4 +1,5 @@
 import formartJson from './formatJson.js';
+import cacthErro from './getCatchErro.js';
 import getResponseApi from './getResponse.js';
 
 export default class methods {
@@ -107,7 +108,8 @@ export default class methods {
           console.log(dadosFunction);
         });
     } catch (err) {
-      console.log(err);
+      let errorCath = new cacthErro('[data-html-for-request]', err);
+      errorCath.init();
       this.carregando = false;
     } finally {
       this.carregando = false;
