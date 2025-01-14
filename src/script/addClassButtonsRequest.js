@@ -17,7 +17,6 @@ export default class addClassbtns {
   }
 
   init() {
-    console.log(this.dataRequestbtns);
     this.addClass();
   }
 }

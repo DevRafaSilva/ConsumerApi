@@ -5,10 +5,6 @@ export default class dadosRequest {
     this.formartJson = fomatadoJson;
   }
 
-  iniciarJson() {
-    console.log(this.formartJson);
-  }
-
   verifyIsFunction() {
     if (typeof this.dados.forEach === 'function') {
       this.postInAppendHtml();
