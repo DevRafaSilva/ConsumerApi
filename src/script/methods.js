@@ -1,4 +1,4 @@
-import dadosRequest from './dadosRequest.js';
+import formartJson from './formatJson.js';
 
 export default class methods {
   constructor(
@@ -47,9 +47,6 @@ export default class methods {
   }
 
   createObjectForHeaders(methodRequest) {
-    console.log(methodRequest);
-    console.log(methodRequest);
-
     let objectRequest = {};
     const bodyData = this.dataBody.value
       ? JSON.parse(this.dataBody.value)
@@ -78,7 +75,6 @@ export default class methods {
   }
 
   fecthUrl({ method, headers, corpo }) {
-    console.log(method);
     try {
       this.carregando = true;
       if (this.carregando) {
@@ -97,12 +93,9 @@ export default class methods {
           return response.json();
         })
         .then((dados) => {
-          let dadosFunction = new dadosRequest(
-            '[data-html-for-request]',
-            dados,
-          );
+          let dadosFunction = new formartJson(dados);
           dadosFunction.init();
-          console.log(dados);
+          console.log(dadosFunction);
         })
         .catch((error) => {
           console.error('Erro CORS ou outro erro:', error);

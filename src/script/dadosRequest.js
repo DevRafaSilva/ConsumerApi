@@ -1,46 +1,41 @@
 export default class dadosRequest {
-  constructor(dataAppend, obj) {
+  constructor(dataAppend, obj, fomatadoJson) {
     this.dataAppend = document.querySelector(dataAppend);
     this.dados = obj;
+    this.formartJson = fomatadoJson;
+  }
+
+  iniciarJson() {
+    console.log(this.formartJson);
   }
 
   verifyIsFunction() {
     if (typeof this.dados.forEach === 'function') {
       this.postInAppendHtml();
+      this.iniciarJson();
     } else {
+      this.iniciarJson();
       this.dadosNotForEach();
     }
   }
 
   dadosNotForEach() {
-    this.dataAppend.innerText = '';
-    console.log(this.dados);
-    let criariDiv = document.createElement('p');
-    let formatJson = JSON.stringify(this.dados);
-    let formatarChaves = formatJson.replace('{', '{\n');
-    console.log(formatarChaves);
-    let formatarVirgulas = formatarChaves.replace(/,/g, ',\n');
-    criariDiv.innerText = formatarVirgulas;
-    criariDiv.classList.add('my-4');
-    this.dataAppend.appendChild(criariDiv);
+    // this.dataAppend.innerText = '';
+    // let criariDiv = document.createElement('p');
+    // criariDiv.innerText = this.formartJson;
+    // criariDiv.classList.add('my-4');
+    // this.dataAppend.appendChild(criariDiv);
   }
 
   postInAppendHtml() {
     this.dataAppend.innerText = '';
-    this.dados.forEach((item) => {
-      let criariDiv = document.createElement('p');
-      console.log(item);
-      let formatJson = JSON.stringify(item);
-      let formatarChaves = formatJson.replace('{', '{\n');
-      let formatarVirgulas = formatarChaves.replace(/,/g, ',\n');
-      criariDiv.innerText = formatarVirgulas;
-      criariDiv.classList.add('my-4');
-      this.dataAppend.appendChild(criariDiv);
-    });
+    let criariDiv = document.createElement('p');
+    criariDiv.innerText = this.formartJson;
+    criariDiv.classList.add('my-4');
+    this.dataAppend.appendChild(criariDiv);
   }
 
   init() {
-    console.log(this.dados);
     this.verifyIsFunction();
   }
 }
