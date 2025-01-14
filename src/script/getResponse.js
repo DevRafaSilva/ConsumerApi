@@ -15,8 +15,6 @@ export default class getResponseApi {
   }
 
   animeBtn() {
-    console.log(this.idInterval);
-    console.log(this.spanAnimate);
     this.textSpan.innerText = this.response.status;
 
     this.dataBtn.classList.remove('hidden');
@@ -40,8 +38,6 @@ export default class getResponseApi {
       'origin-center',
     );
 
-    console.log(this.response.status);
-
     if (
       this.response.status === 200 ||
       this.response.status === 201 ||
@@ -50,7 +46,6 @@ export default class getResponseApi {
       this.textSpan.classList.add('text-green-900');
       this.dataBtn.classList.add('bg-green-400');
     } else if (this.response.status === 404) {
-      console.log('else');
       this.textSpan.classList.remove('text-green-900');
       this.textSpan.classList.add('text-orange-800');
       this.dataBtn.classList.add('bg-orange-400');

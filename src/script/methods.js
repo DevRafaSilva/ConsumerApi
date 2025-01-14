@@ -1,5 +1,5 @@
 import formartJson from './formatJson.js';
-import cacthErro from './getCatchErro.js';
+
 import getResponseApi from './getResponse.js';
 
 export default class methods {
@@ -90,7 +90,6 @@ export default class methods {
         body: corpo,
       })
         .then((response) => {
-          console.log(response);
           let getResponse = new getResponseApi(
             response,
             '[data-btn-response]',
@@ -105,11 +104,10 @@ export default class methods {
         .then((dados) => {
           let dadosFunction = new formartJson(dados);
           dadosFunction.init();
-          console.log(dadosFunction);
         });
     } catch (err) {
-      let errorCath = new cacthErro('[data-html-for-request]', err);
-      errorCath.init();
+      console.log(err);
+
       this.carregando = false;
     } finally {
       this.carregando = false;

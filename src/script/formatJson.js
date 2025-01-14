@@ -17,7 +17,6 @@ export default class formartJson {
       .replace(/\n    \n/g, '\n    ')
       .replace(/}/g, '\n  }');
 
-    console.log(formatadoJson);
     const dadosR = new dadosRequest(
       '[data-html-for-request]',
       this.dados,
@@ -29,6 +28,5 @@ export default class formartJson {
 
   init() {
     this.format();
-    console.log(this.dados);
   }
 }
