@@ -43,9 +43,11 @@ export default class getResponseApi {
       this.response.status === 201 ||
       this.response.status === 204
     ) {
-      this.textSpan.classList.add('text-green-900');
-      this.dataBtn.classList.add('bg-green-400');
+      this.dataBtn.style.backgroundColor = '#14532d ';
+      this.dataBtn.style.color = '#f0fdf4 ';
     } else if (this.response.status === 404) {
+      this.dataBtn.style.backgroundColor = '#f97316 ';
+      this.dataBtn.style.color = '#f7f7f7 ';
       this.textSpan.classList.remove('text-green-900');
       this.textSpan.classList.add('text-orange-800');
       this.dataBtn.classList.add('bg-orange-400');

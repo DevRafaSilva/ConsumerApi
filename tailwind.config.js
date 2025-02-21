@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js}'],
+  content: [
+    './src/scripts/**/*.js', // Caminho corrigido para a pasta "scripts"
+    './index.html', // Caminho direto para o arquivo HTML na raiz
+  ],
   theme: {
     extend: {
       keyframes: {
